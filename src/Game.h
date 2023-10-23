@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "Player.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -17,6 +17,7 @@ private:
     sf::RenderWindow& rw;
     sf::Clock clock;
     /** Game Variables **/
+    Player player;
 };
 
 #endif

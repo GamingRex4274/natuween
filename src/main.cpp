@@ -3,7 +3,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Abstract Data Taip");
-    window.setFramerateLimit(5);
+    window.setFramerateLimit(60);
 
     Game game(window);
     while (window.isOpen())

@@ -28,8 +28,10 @@ void Game::processEvents()
 void Game::updateEntities()
 {
     float dt = clock.restart().asSeconds();
+    player.update(dt);
 }
 
 void Game::drawFrame()
 {
+    player.draw(rw);
 }
