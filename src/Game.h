@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <random>
 
 #ifndef GAME_H
 #define GAME_H
@@ -16,9 +15,8 @@ private:
     /** Game Functions **/
 private:
     sf::RenderWindow& rw;
-    /* Game Variables **/
-    sf::CircleShape circle = sf::CircleShape(200.0f);
-    std::mt19937 rng = std::mt19937(std::random_device{}());
+    sf::Clock clock;
+    /** Game Variables **/
 };
 
 #endif

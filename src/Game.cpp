@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <iostream>
 
 Game::Game(sf::RenderWindow& rw)
     :
@@ -28,13 +27,9 @@ void Game::processEvents()
 
 void Game::updateEntities()
 {
-    std::uniform_int_distribution<int> dist(0, 255);
-    sf::Color c = sf::Color(dist(rng), dist(rng), dist(rng));
-    std::cout << c.r << " " << c.g << " " << c.b << "\n";
-    circle.setFillColor(c);
+    float dt = clock.restart().asSeconds();
 }
 
 void Game::drawFrame()
 {
-    rw.draw(circle);
 }
