@@ -1,8 +1,9 @@
 #include "Game.h"
+#include "RamWindow.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Abstract Data Taip");
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Natuween");
     window.setFramerateLimit(60);
 
     Game game(window);
