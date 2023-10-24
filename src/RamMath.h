@@ -6,12 +6,11 @@ static float GetLengthSq(const sf::Vector2f& v)
     return v.x * v.x + v.y * v.y;
 }
 
-static float GetLength(const sf::Vector2f& v)
+static sf::Vector2f GetNormalized(const sf::Vector2f& v)
 {
-    return sqrt(GetLengthSq(v));
-}
-
-const sf::Vector2f GetNormalized(const sf::Vector2f& v)
-{
-    return v / GetLength(v);
+    const float sqLength = GetLengthSq(v);
+    if (sqLength != 0)
+        return v / float(sqrt(sqLength));
+    else
+        return v;
 }

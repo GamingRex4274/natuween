@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "RamWindow.h"
+#include "RamMath.h"
 
 Player::Player()
 {
@@ -22,7 +23,7 @@ void Player::draw(sf::RenderWindow& rw)
 
 void Player::translate(float dt)
 {
-    sf::Vector2f dir;
+    sf::Vector2f dir = {0.0f, 0.0f};
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         dir.x = -1.0f;
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -32,6 +33,7 @@ void Player::translate(float dt)
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         dir.y = 1.0f;
     
+    dir = GetNormalized(dir);
     rect.move(dir * speed * dt);
 }
 
