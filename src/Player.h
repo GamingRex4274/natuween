@@ -10,6 +10,9 @@ public:
     void update(float dt);
     void draw(sf::RenderWindow& rw);
 private:
+    void translate(float dt);
+    void wrap();
+private:
     static constexpr int size = 32;
     static constexpr float speed = 200;
     sf::RectangleShape rect;
