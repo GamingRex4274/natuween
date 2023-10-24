@@ -11,6 +11,17 @@ Player::Player()
 
 void Player::update(float dt)
 {
+    translate(dt);
+    wrap();
+}
+
+void Player::draw(sf::RenderWindow& rw)
+{
+    rw.draw(rect);
+}
+
+void Player::translate(float dt)
+{
     sf::Vector2f dir;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         dir.x = -1.0f;
@@ -24,7 +35,23 @@ void Player::update(float dt)
     rect.move(dir * speed * dt);
 }
 
-void Player::draw(sf::RenderWindow& rw)
+void Player::wrap()
 {
-    rw.draw(rect);
+    sf::Vector2f pos = rect.getPosition();
+
+    // If RIGHT side goes beyond left of screen.
+    if (pos.x + size < 0)
+        pos.x = SCREEN_WIDTH + size;
+    // If LEFT side goes beyond right of screen.
+    else if (pos.x - size >= SCREEN_WIDTH)
+        pos.x = -size;
+    // If BOTTOM goes beyond top of screen.
+    if (pos.y + size < 0)
+        pos.y = SCREEN_HEIGHT + size;
+    // If TOP goes beyond bottom of screen.
+    else if (pos.y - size >= SCREEN_HEIGHT)
+        pos.y = -size;
+
+    if (pos != rect.getPosition())
+        rect.setPosition(pos);
 }
