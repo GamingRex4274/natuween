@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Mob.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -18,6 +19,7 @@ private:
     sf::Clock clock;
     /** Game Variables **/
     Player player;
+    Mob mob;
 };
 
 #endif

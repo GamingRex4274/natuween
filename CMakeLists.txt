@@ -9,7 +9,7 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(GameJamProject src/main.cpp src/Game.cpp src/Player.cpp)
+add_executable(GameJamProject src/main.cpp src/Game.cpp src/Player.cpp src/Mob.cpp src/RamMath.h)
 target_link_libraries(GameJamProject PRIVATE sfml-graphics)
 target_compile_features(GameJamProject PRIVATE cxx_std_17)
 
