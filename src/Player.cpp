@@ -22,17 +22,6 @@ void Player::draw(sf::RenderWindow& rw)
 
 void Player::translate(float dt)
 {
-    translate(dt);
-    wrap();
-}
-
-void Player::draw(sf::RenderWindow& rw)
-{
-    rw.draw(rect);
-}
-
-void Player::translate(float dt)
-{
     sf::Vector2f dir;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         dir.x = -1.0f;
