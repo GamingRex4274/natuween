@@ -4,6 +4,10 @@ Game::Game(sf::RenderWindow& rw)
     :
     rw(rw)
 {
+    font.loadFromFile("src\\consola.ttf");
+    text.setFont(font);
+    text.setPosition({0,0});
+
     for (int n = 0; n < 10; n++)
         mobs.emplace_back();
 }
@@ -43,6 +47,9 @@ void Game::drawFrame()
     player.draw(rw);
     for (Mob& m : mobs)
         m.draw(rw);
+    
+    text.setString(std::to_string(score));
+    rw.draw(text);
 }
 
 void Game::doPlayerMobCollision()
@@ -51,8 +58,11 @@ void Game::doPlayerMobCollision()
     while (i != mobs.end())
     {
         if (player.getRect().intersects(i->getRect()))
+        {
+            score++;
             // Erase element and fix iterator.
             i = mobs.erase(i);
+        }
         else
             // Advance iterator normally.
             i++;

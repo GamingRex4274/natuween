@@ -22,6 +22,9 @@ private:
     /** Game Variables **/
     Player player;
     std::vector<Mob> mobs;
+    sf::Font font;
+    sf::Text text;
+    int score = 0;
 };
 
 #endif
