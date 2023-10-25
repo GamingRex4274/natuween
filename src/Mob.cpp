@@ -1,7 +1,7 @@
 #include "Mob.h"
 #include "RamWindow.h"
 #include "RamMath.h"
-#include <ctime>
+#include <random>
 
 Mob::Mob()
     :
@@ -10,17 +10,16 @@ Mob::Mob()
     circle.setFillColor(sf::Color::Cyan);
     circle.setOrigin({radius, radius});
 
-    srand(time(nullptr));
+    std::mt19937 rng(std::random_device{}());
 
     // Generate random position.
-    const int x = rand() % SCREEN_WIDTH;
-    const int y = rand() % SCREEN_HEIGHT;
-    circle.setPosition(sf::Vector2f(x, y));
+    std::uniform_real_distribution<float> xDist(0.0f, SCREEN_WIDTH);
+    std::uniform_real_distribution<float> yDist(0.0f, SCREEN_HEIGHT);
+    circle.setPosition(sf::Vector2f(xDist(rng), yDist(rng)));
 
     // Generate random direction.
-    const float xDir = rand() / float(RAND_MAX);
-    const float yDir = rand() / float(RAND_MAX);
-    dir = GetNormalized(sf::Vector2f(xDir, yDir));
+    std::uniform_real_distribution<float> dirDist(0.0f, 1.0f);
+    dir = GetNormalized(sf::Vector2f(dirDist(rng), dirDist(rng)));
 }
 
 void Mob::update(float dt)
