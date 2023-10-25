@@ -4,6 +4,8 @@ Game::Game(sf::RenderWindow& rw)
     :
     rw(rw)
 {
+    for (int n = 0; n < 10; n++)
+        mobs.emplace_back();
 }
 
 void Game::run()
@@ -29,11 +31,14 @@ void Game::updateEntities()
 {
     float dt = clock.restart().asSeconds();
     player.update(dt);
-    mob.update(dt);
+
+    for (Mob& m : mobs)
+        m.update(dt);
 }
 
 void Game::drawFrame()
 {
     player.draw(rw);
-    mob.draw(rw);
+    for (Mob& m : mobs)
+        m.draw(rw);
 }

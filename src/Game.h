@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Mob.h"
+#include <vector>
 
 #ifndef GAME_H
 #define GAME_H
@@ -19,7 +20,7 @@ private:
     sf::Clock clock;
     /** Game Variables **/
     Player player;
-    Mob mob;
+    std::vector<Mob> mobs;
 };
 
 #endif
