@@ -21,6 +21,11 @@ void Player::draw(sf::RenderWindow& rw)
     rw.draw(rect);
 }
 
+sf::FloatRect Player::getRect() const
+{
+    return rect.getGlobalBounds();
+}
+
 void Player::translate(float dt)
 {
     sf::Vector2f dir = {0.0f, 0.0f};

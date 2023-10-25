@@ -53,3 +53,8 @@ void Mob::wrap()
     if (pos != circle.getPosition())
         circle.setPosition(pos);
 }
+
+sf::FloatRect Mob::getRect() const
+{
+    return circle.getGlobalBounds();
+}

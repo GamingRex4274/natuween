@@ -9,6 +9,7 @@ public:
     Mob();
     void update(float dt);
     void draw(sf::RenderWindow& rw);
+    sf::FloatRect getRect() const;
 private:
     void wrap();
 private:

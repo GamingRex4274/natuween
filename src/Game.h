@@ -15,6 +15,7 @@ private:
     void updateEntities();
     void drawFrame();
     /** Game Functions **/
+    void doPlayerMobCollision();
 private:
     sf::RenderWindow& rw;
     sf::Clock clock;

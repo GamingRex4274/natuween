@@ -34,6 +34,8 @@ void Game::updateEntities()
 
     for (Mob& m : mobs)
         m.update(dt);
+
+    doPlayerMobCollision();
 }
 
 void Game::drawFrame()
@@ -41,4 +43,18 @@ void Game::drawFrame()
     player.draw(rw);
     for (Mob& m : mobs)
         m.draw(rw);
+}
+
+void Game::doPlayerMobCollision()
+{
+    auto i = mobs.begin();
+    while (i != mobs.end())
+    {
+        if (player.getRect().intersects(i->getRect()))
+            // Erase element and fix iterator.
+            i = mobs.erase(i);
+        else
+            // Advance iterator normally.
+            i++;
+    }
 }
