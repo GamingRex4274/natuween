@@ -37,7 +37,7 @@ void Game::updateEntities()
     player.update(dt);
 
     for (Mob& m : mobs)
-        m.update(dt);
+        m.update(player, dt);
 
     doPlayerMobCollision();
 }

@@ -5,25 +5,34 @@
 
 Mob::Mob()
     :
-    circle(radius)
+    circle(radius),
+    rng(std::random_device{}()),
+    dirDist(0.0f, 1.0f)
 {
-    circle.setFillColor(sf::Color::Cyan);
     circle.setOrigin({radius, radius});
-
-    std::mt19937 rng(std::random_device{}());
 
     // Generate random position.
     std::uniform_real_distribution<float> xDist(0.0f, SCREEN_WIDTH);
     std::uniform_real_distribution<float> yDist(0.0f, SCREEN_HEIGHT);
     circle.setPosition(sf::Vector2f(xDist(rng), yDist(rng)));
 
-    // Generate random direction.
-    std::uniform_real_distribution<float> dirDist(0.0f, 1.0f);
-    dir = GetNormalized(sf::Vector2f(dirDist(rng), dirDist(rng)));
+    // Set initial hostility to false.
+    toggleHostility();
 }
 
-void Mob::update(float dt)
+void Mob::update(const Player& player, float dt)
 {
+    const float targetTime = (isHostile) ? hostileTime : docileTime;
+    curTime += dt;
+    if (curTime >= targetTime)
+    {
+        toggleHostility();
+        curTime = 0.0f;
+    }
+
+    if (isHostile)
+        dir = GetNormalized(player.getRect().getPosition() - circle.getPosition());
+
     circle.move(dir * speed * dt);
     wrap();
 }
@@ -52,6 +61,22 @@ void Mob::wrap()
 
     if (pos != circle.getPosition())
         circle.setPosition(pos);
+}
+
+void Mob::toggleHostility()
+{
+    // Change to docile attributes.
+    if (isHostile)
+    {
+        circle.setFillColor(sf::Color::Cyan);
+        // Generate random direction.
+        dir = GetNormalized(sf::Vector2f(dirDist(rng), dirDist(rng)));
+    }
+    // Change to hostile attributes.
+    else
+        circle.setFillColor(sf::Color::Red);
+
+    isHostile = !isHostile;
 }
 
 sf::FloatRect Mob::getRect() const
