@@ -12,6 +12,7 @@ public:
     void draw(sf::RenderWindow& rw);
     sf::FloatRect getRect() const;
     bool IsHostile() const;
+    bool HasBonus() const;
 private:
     void wrap();
     void toggleHostility();
@@ -22,6 +23,7 @@ private:
     float docileTime;
     float curTime = 0.0f;
     bool isHostile = true;
+    bool hasBonus = false;
     sf::CircleShape circle;
     sf::Vector2f dir;
     std::mt19937 rng;

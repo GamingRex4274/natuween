@@ -87,7 +87,7 @@ void Game::doPlayerMobCollision()
             else
             {
                 // Collided with docile mob. Increase score.
-                score++;
+                score += (i->HasBonus()) ? 5 : 1;
                 // Erase element and fix iterator.
                 i = mobs.erase(i);
             }

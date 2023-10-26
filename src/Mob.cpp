@@ -31,11 +31,17 @@ void Mob::update(const Player& player, float dt)
     curTime += dt;
     if (curTime >= targetTime)
     {
+        hasBonus = false;
         toggleHostility();
         curTime = 0.0f;
     }
     else if (!isHostile && curTime >= targetTime - 1.0f)
+    {
+        // Warning 1 second before turning hostile.
         circle.setFillColor(sf::Color::Magenta);
+        // Bonus activated.
+        hasBonus = true;
+    }
 
     if (isHostile)
         dir = GetNormalized(player.getRect().getPosition() - circle.getPosition());
@@ -94,4 +100,9 @@ sf::FloatRect Mob::getRect() const
 bool Mob::IsHostile() const
 {
     return isHostile;
+}
+
+bool Mob::HasBonus() const
+{
+    return hasBonus;
 }
