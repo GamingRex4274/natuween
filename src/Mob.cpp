@@ -34,6 +34,8 @@ void Mob::update(const Player& player, float dt)
         toggleHostility();
         curTime = 0.0f;
     }
+    else if (!isHostile && curTime >= targetTime - 1.0f)
+        circle.setFillColor(sf::Color::Magenta);
 
     if (isHostile)
         dir = GetNormalized(player.getRect().getPosition() - circle.getPosition());
