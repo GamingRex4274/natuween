@@ -27,6 +27,8 @@ private:
     sf::Text gameOverText = {"GAME OVER", font, 50};
     int score = 0;
     bool gameIsOver = false;
+    float curTime = 0.0f;
+    static constexpr float mobSpawnTime = 5.0f;
 };
 
 #endif

@@ -11,9 +11,9 @@ Game::Game(sf::RenderWindow& rw)
 
     gameOverText.setOrigin(gameOverText.getGlobalBounds().getSize() / 2.0f);
     gameOverText.setPosition(GetScreenCenter());
-
-    for (int n = 0; n < 10; n++)
-        mobs.emplace_back();
+    
+    // Spawn first mob immediately.
+    mobs.emplace_back();
 }
 
 void Game::run()
@@ -40,6 +40,14 @@ void Game::updateEntities()
     if (!gameIsOver)
     {
         float dt = clock.restart().asSeconds();
+
+        curTime += dt;
+        if (curTime >= mobSpawnTime)
+        {
+            mobs.emplace_back();
+            curTime = 0.0f;
+        }
+        
         player.update(dt);
 
         for (Mob& m : mobs)
