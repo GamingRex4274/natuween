@@ -23,8 +23,10 @@ private:
     Player player;
     std::vector<Mob> mobs;
     sf::Font font;
-    sf::Text text;
+    sf::Text scoreText;
+    sf::Text gameOverText = {"GAME OVER", font, 50};
     int score = 0;
+    bool gameIsOver = false;
 };
 
 #endif

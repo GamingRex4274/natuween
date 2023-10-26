@@ -83,3 +83,8 @@ sf::FloatRect Mob::getRect() const
 {
     return circle.getGlobalBounds();
 }
+
+bool Mob::IsHostile() const
+{
+    return isHostile;
+}

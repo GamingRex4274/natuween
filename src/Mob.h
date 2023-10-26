@@ -11,6 +11,7 @@ public:
     void update(const Player& player, float dt);
     void draw(sf::RenderWindow& rw);
     sf::FloatRect getRect() const;
+    bool IsHostile() const;
 private:
     void wrap();
     void toggleHostility();

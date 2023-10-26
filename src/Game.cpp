@@ -1,12 +1,16 @@
 #include "Game.h"
+#include "RamWindow.h"
 
 Game::Game(sf::RenderWindow& rw)
     :
     rw(rw)
 {
     font.loadFromFile("src\\consola.ttf");
-    text.setFont(font);
-    text.setPosition({0,0});
+    scoreText.setFont(font);
+    scoreText.setPosition({0,0});
+
+    gameOverText.setOrigin(gameOverText.getGlobalBounds().getSize() / 2.0f);
+    gameOverText.setPosition(GetScreenCenter());
 
     for (int n = 0; n < 10; n++)
         mobs.emplace_back();
@@ -33,13 +37,16 @@ void Game::processEvents()
 
 void Game::updateEntities()
 {
-    float dt = clock.restart().asSeconds();
-    player.update(dt);
+    if (!gameIsOver)
+    {
+        float dt = clock.restart().asSeconds();
+        player.update(dt);
 
-    for (Mob& m : mobs)
-        m.update(player, dt);
+        for (Mob& m : mobs)
+            m.update(player, dt);
 
-    doPlayerMobCollision();
+        doPlayerMobCollision();
+    }
 }
 
 void Game::drawFrame()
@@ -48,8 +55,11 @@ void Game::drawFrame()
     for (Mob& m : mobs)
         m.draw(rw);
     
-    text.setString(std::to_string(score));
-    rw.draw(text);
+    scoreText.setString(std::to_string(score));
+    rw.draw(scoreText);
+
+    if (gameIsOver)
+        rw.draw(gameOverText);
 }
 
 void Game::doPlayerMobCollision()
@@ -59,9 +69,20 @@ void Game::doPlayerMobCollision()
     {
         if (player.getRect().intersects(i->getRect()))
         {
-            score++;
-            // Erase element and fix iterator.
-            i = mobs.erase(i);
+            if (i->IsHostile())
+            {
+                // Collided with hostile mob.
+                // Break out of loop immediately and end game.
+                gameIsOver = true;
+                break;
+            }
+            else
+            {
+                // Collided with docile mob. Increase score.
+                score++;
+                // Erase element and fix iterator.
+                i = mobs.erase(i);
+            }
         }
         else
             // Advance iterator normally.
