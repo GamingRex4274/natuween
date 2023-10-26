@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "TextureManager.h"
 #include <random>
 
 #ifndef MOB_H
@@ -18,13 +19,14 @@ private:
     void toggleHostility();
 private:
     static constexpr float speed = 200;
-    static constexpr int radius = 15;
+    static constexpr int size = 30;
     float hostileTime;
     float docileTime;
     float curTime = 0.0f;
     bool isHostile = true;
     bool hasBonus = false;
-    sf::CircleShape circle;
+    std::shared_ptr<sf::Texture> pTex;
+    sf::Sprite sprite;
     sf::Vector2f dir;
     std::mt19937 rng;
     std::uniform_real_distribution<float> dirDist;

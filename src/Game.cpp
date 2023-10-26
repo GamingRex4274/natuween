@@ -41,6 +41,8 @@ void Game::processEvents()
 void Game::updateEntities()
 {
     float dt = clock.restart().asSeconds();
+    TextureManager::clean();
+
     if (!gameIsOver)
     {
         curTime += dt;
