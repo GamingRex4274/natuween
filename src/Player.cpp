@@ -12,8 +12,23 @@ Player::Player()
 
 void Player::update(float dt)
 {
+    if (isDashing)
+    {
+        curTime += dt;
+        if (curTime >= dashTime)
+        {
+            isDashing = false;
+            curTime = 0.0f;
+        }
+    }
+
     translate(dt);
     wrap();
+}
+
+void Player::activateDash()
+{
+    isDashing = true;
 }
 
 void Player::draw(sf::RenderWindow& rw)
@@ -44,7 +59,9 @@ void Player::translate(float dt)
         dir.y = 1.0f;
     
     dir = GetNormalized(dir);
-    rect.move(dir * speed * dt);
+    
+    const float speedupFactor = (isDashing) ? dashFactor : 1.0f;
+    rect.move(dir * speed * speedupFactor * dt);
 }
 
 void Player::wrap()

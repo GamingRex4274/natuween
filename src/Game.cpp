@@ -35,6 +35,11 @@ void Game::processEvents()
     {
         if (event.type == sf::Event::Closed)
             rw.close();
+        else if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::Space)
+                player.activateDash();
+        }
     }
 }
 
