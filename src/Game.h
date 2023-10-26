@@ -26,6 +26,7 @@ private:
     sf::Font font;
     sf::Text scoreText;
     sf::Text gameOverText = {"GAME OVER", font, 50};
+    sf::Text subText = {"Press ENTER to restart.", font, 15};
     int score = 0;
     bool gameIsOver = false;
     float curTime = 0.0f;

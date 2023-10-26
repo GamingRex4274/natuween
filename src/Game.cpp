@@ -7,10 +7,13 @@ Game::Game(sf::RenderWindow& rw)
 {
     font.loadFromFile("src\\consola.ttf");
     scoreText.setFont(font);
-    scoreText.setPosition({0,0});
+    scoreText.setPosition({5, 5});
 
     gameOverText.setOrigin(gameOverText.getGlobalBounds().getSize() / 2.0f);
     gameOverText.setPosition(GetScreenCenter());
+
+    subText.setOrigin(subText.getGlobalBounds().getSize() / 2.0f);
+    subText.setPosition(GetScreenCenter().x, SCREEN_HEIGHT - 15);
     
     // Spawn first mob immediately.
     mobs.emplace_back();
@@ -67,11 +70,14 @@ void Game::drawFrame()
     for (Mob& m : mobs)
         m.draw(rw);
     
-    scoreText.setString(std::to_string(score));
+    scoreText.setString("Score:\n" + std::to_string(score));
     rw.draw(scoreText);
 
     if (gameIsOver)
+    {
         rw.draw(gameOverText);
+        rw.draw(subText);
+    }
 }
 
 void Game::doPlayerMobCollision()
