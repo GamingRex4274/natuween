@@ -18,8 +18,8 @@ private:
 private:
     static constexpr float speed = 200;
     static constexpr int radius = 15;
-    static constexpr float hostileTime = 5.0f;
-    static constexpr float docileTime = 3.0f;
+    float hostileTime;
+    float docileTime;
     float curTime = 0.0f;
     bool isHostile = true;
     sf::CircleShape circle;

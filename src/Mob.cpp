@@ -16,6 +16,11 @@ Mob::Mob()
     std::uniform_real_distribution<float> yDist(0.0f, SCREEN_HEIGHT);
     circle.setPosition(sf::Vector2f(xDist(rng), yDist(rng)));
 
+    // Generate random timers.
+    std::uniform_real_distribution<float> tDist(2.0f, 8.0f);
+    hostileTime = tDist(rng);
+    docileTime = tDist(rng);
+
     // Set initial hostility to false.
     toggleHostility();
 }
