@@ -16,6 +16,7 @@ private:
     void drawFrame();
     /** Game Functions **/
     void doPlayerMobCollision();
+    void reset();
 private:
     sf::RenderWindow& rw;
     sf::Clock clock;

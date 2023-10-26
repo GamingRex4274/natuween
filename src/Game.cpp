@@ -37,10 +37,9 @@ void Game::processEvents()
 
 void Game::updateEntities()
 {
+    float dt = clock.restart().asSeconds();
     if (!gameIsOver)
     {
-        float dt = clock.restart().asSeconds();
-
         curTime += dt;
         if (curTime >= mobSpawnTime)
         {
@@ -54,6 +53,11 @@ void Game::updateEntities()
             m.update(player, dt);
 
         doPlayerMobCollision();
+    }
+    else
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            reset();
     }
 }
 
@@ -96,4 +100,14 @@ void Game::doPlayerMobCollision()
             // Advance iterator normally.
             i++;
     }
+}
+
+void Game::reset()
+{
+    player.reset();
+    mobs.clear();
+    mobs.emplace_back();
+    score = 0;
+    curTime = 0.0f;
+    gameIsOver = false;
 }

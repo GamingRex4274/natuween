@@ -7,7 +7,7 @@ Player::Player()
     rect.setSize({size, size});
     rect.setFillColor(sf::Color::White);
     rect.setOrigin(sf::Vector2f(size, size) / 2.0f);
-    rect.setPosition(GetScreenCenter());
+    reset();
 }
 
 void Player::update(float dt)
@@ -19,6 +19,11 @@ void Player::update(float dt)
 void Player::draw(sf::RenderWindow& rw)
 {
     rw.draw(rect);
+}
+
+void Player::reset()
+{
+    rect.setPosition(GetScreenCenter());
 }
 
 sf::FloatRect Player::getRect() const

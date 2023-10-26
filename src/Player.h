@@ -9,6 +9,7 @@ public:
     Player();
     void update(float dt);
     void draw(sf::RenderWindow& rw);
+    void reset();
     sf::FloatRect getRect() const;
 private:
     void translate(float dt);
