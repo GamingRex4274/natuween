@@ -21,6 +21,15 @@ void Player::update(float dt)
             curTime = 0.0f;
         }
     }
+    else if (!canDash)
+    {
+        curTime += dt;
+        if (curTime >= dashCooldownTime)
+        {
+            canDash = true;
+            curTime = 0.0f;
+        }
+    }
 
     translate(dt);
     wrap();
@@ -28,7 +37,11 @@ void Player::update(float dt)
 
 void Player::activateDash()
 {
-    isDashing = true;
+    if (canDash)
+    {
+        canDash = false;
+        isDashing = true;
+    }
 }
 
 void Player::draw(sf::RenderWindow& rw)
@@ -39,6 +52,7 @@ void Player::draw(sf::RenderWindow& rw)
 void Player::reset()
 {
     rect.setPosition(GetScreenCenter());
+    canDash = true;
     isDashing = false;
     curTime = 0.0f;
 }

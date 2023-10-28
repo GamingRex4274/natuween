@@ -20,8 +20,10 @@ private:
     static constexpr float speed = 200;
     static constexpr float dashFactor = 3.5f;
     static constexpr float dashTime = 1.0f;
+    static constexpr float dashCooldownTime = 5.0f;
     float curTime = 0.0f;
     bool isDashing = false;
+    bool canDash = true;
     sf::RectangleShape rect;
 };
 
