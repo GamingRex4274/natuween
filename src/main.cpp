@@ -5,6 +5,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Natuween");
     window.setFramerateLimit(60);
+    window.setKeyRepeatEnabled(false);
 
     Game game(window);
     while (window.isOpen())

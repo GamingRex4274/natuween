@@ -39,6 +39,8 @@ void Player::draw(sf::RenderWindow& rw)
 void Player::reset()
 {
     rect.setPosition(GetScreenCenter());
+    isDashing = false;
+    curTime = 0.0f;
 }
 
 sf::FloatRect Player::getRect() const
