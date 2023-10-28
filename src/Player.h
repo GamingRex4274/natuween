@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "TextureManager.h"
 
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -16,7 +17,8 @@ private:
     void translate(float dt);
     void wrap();
 private:
-    static constexpr int size = 32;
+    static constexpr int width = 23;
+    static constexpr int height = 31;
     static constexpr float speed = 200;
     static constexpr float dashFactor = 3.5f;
     static constexpr float dashTime = 1.0f;
@@ -24,7 +26,8 @@ private:
     float curTime = 0.0f;
     bool isDashing = false;
     bool canDash = true;
-    sf::RectangleShape rect;
+    std::shared_ptr<sf::Texture> pTex;
+    sf::Sprite sprite;
 };
 
 #endif

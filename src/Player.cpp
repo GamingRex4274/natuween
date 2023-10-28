@@ -4,9 +4,10 @@
 
 Player::Player()
 {
-    rect.setSize({size, size});
-    rect.setFillColor(sf::Color::White);
-    rect.setOrigin(sf::Vector2f(size, size) / 2.0f);
+    pTex = TextureManager::acquire("src\\reaper.png");
+    sprite.setTexture(*pTex);
+    sprite.setTextureRect({0, 0, width, height});
+    sprite.setOrigin(sf::Vector2f(width, height) / 2.0f);
     reset();
 }
 
@@ -46,12 +47,12 @@ void Player::activateDash()
 
 void Player::draw(sf::RenderWindow& rw)
 {
-    rw.draw(rect);
+    rw.draw(sprite);
 }
 
 void Player::reset()
 {
-    rect.setPosition(GetScreenCenter());
+    sprite.setPosition(GetScreenCenter());
     canDash = true;
     isDashing = false;
     curTime = 0.0f;
@@ -59,16 +60,22 @@ void Player::reset()
 
 sf::FloatRect Player::getRect() const
 {
-    return rect.getGlobalBounds();
+    return sprite.getGlobalBounds();
 }
 
 void Player::translate(float dt)
 {
     sf::Vector2f dir = {0.0f, 0.0f};
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
         dir.x = -1.0f;
+        sprite.setTextureRect({width, 0, width, height});
+    }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
         dir.x = 1.0f;
+        sprite.setTextureRect({0, 0, width, height});
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         dir.y = -1.0f;
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -77,26 +84,26 @@ void Player::translate(float dt)
     dir = GetNormalized(dir);
     
     const float speedupFactor = (isDashing) ? dashFactor : 1.0f;
-    rect.move(dir * speed * speedupFactor * dt);
+    sprite.move(dir * speed * speedupFactor * dt);
 }
 
 void Player::wrap()
 {
-    sf::Vector2f pos = rect.getPosition();
+    sf::Vector2f pos = sprite.getPosition();
 
     // If RIGHT side goes beyond left of screen.
-    if (pos.x + size < 0)
-        pos.x = SCREEN_WIDTH + size;
+    if (pos.x + width / 2 < 0)
+        pos.x = SCREEN_WIDTH + width / 2;
     // If LEFT side goes beyond right of screen.
-    else if (pos.x - size >= SCREEN_WIDTH)
-        pos.x = -size;
+    else if (pos.x - (width / 2) >= SCREEN_WIDTH)
+        pos.x = -(width / 2);
     // If BOTTOM goes beyond top of screen.
-    if (pos.y + size < 0)
-        pos.y = SCREEN_HEIGHT + size;
+    if (pos.y + height / 2 < 0)
+        pos.y = SCREEN_HEIGHT + height / 2;
     // If TOP goes beyond bottom of screen.
-    else if (pos.y - size >= SCREEN_HEIGHT)
-        pos.y = -size;
+    else if (pos.y - (height / 2) >= SCREEN_HEIGHT)
+        pos.y = -(height / 2);
 
-    if (pos != rect.getPosition())
-        rect.setPosition(pos);
+    if (pos != sprite.getPosition())
+        sprite.setPosition(pos);
 }

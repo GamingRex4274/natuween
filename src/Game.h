@@ -25,7 +25,7 @@ private:
     std::vector<Mob> mobs;
     sf::Font font;
     sf::Text scoreText;
-    sf::Text gameOverText = {"YOU GOT REAPED", font, 50};
+    sf::Text gameOverText = {"YOU GOT HARVESTED", font, 50};
     sf::Text subText = {"Press ENTER to restart.", font, 15};
     int score = 0;
     bool gameIsOver = false;
