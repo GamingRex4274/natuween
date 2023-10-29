@@ -27,6 +27,8 @@ private:
     sf::Text scoreText;
     sf::Text gameOverText = {"YOU GOT HARVESTED", font, 50};
     sf::Text subText = {"Press ENTER to restart.", font, 15};
+    sf::Texture t;
+    sf::Sprite bg;
     int score = 0;
     bool gameIsOver = false;
     float curTime = 0.0f;

@@ -5,6 +5,11 @@ Game::Game(sf::RenderWindow& rw)
     :
     rw(rw)
 {
+    t.loadFromFile("src\\bg.png");
+    bg.setTexture(t);
+    bg.setOrigin(bg.getGlobalBounds().getSize() / 2.0f);
+    bg.setPosition(GetScreenCenter());
+
     font.loadFromFile("src\\consola.ttf");
     scoreText.setFont(font);
     scoreText.setPosition({5, 5});
@@ -73,6 +78,7 @@ void Game::updateEntities()
 
 void Game::drawFrame()
 {
+    rw.draw(bg);
     player.draw(rw);
     for (Mob& m : mobs)
         m.draw(rw);
