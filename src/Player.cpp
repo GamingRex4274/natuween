@@ -63,6 +63,14 @@ sf::FloatRect Player::getRect() const
     return sprite.getGlobalBounds();
 }
 
+int Player::getCountdown() const
+{
+    if (!isDashing && !canDash)
+        return static_cast<int>(dashCooldownTime - curTime);
+    else
+        return 0;
+}
+
 void Player::translate(float dt)
 {
     sf::Vector2f dir = {0.0f, 0.0f};

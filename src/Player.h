@@ -13,6 +13,7 @@ public:
     void draw(sf::RenderWindow& rw);
     void reset();
     sf::FloatRect getRect() const;
+    int getCountdown() const;
 private:
     void translate(float dt);
     void wrap();

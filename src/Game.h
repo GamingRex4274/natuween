@@ -25,8 +25,10 @@ private:
     std::vector<Mob> mobs;
     sf::Font font;
     sf::Text scoreText;
+    sf::Text cooldownText;
     sf::Text gameOverText = {"YOU GOT HARVESTED", font, 50};
     sf::Text subText = {"Press ENTER to restart.", font, 15};
+    sf::Text dashText = {"SPACE = Dash", font};
     sf::Texture t;
     sf::Sprite bg;
     int score = 0;

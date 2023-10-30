@@ -14,6 +14,10 @@ Game::Game(sf::RenderWindow& rw)
     scoreText.setFont(font);
     scoreText.setPosition({5, 5});
 
+    dashText.setPosition({5, SCREEN_HEIGHT - 70});
+    cooldownText.setFont(font);
+    cooldownText.setPosition({5, SCREEN_HEIGHT - 35});
+
     gameOverText.setOrigin(gameOverText.getGlobalBounds().getSize() / 2.0f);
     gameOverText.setPosition(GetScreenCenter());
 
@@ -85,6 +89,10 @@ void Game::drawFrame()
     
     scoreText.setString("Score:\n" + std::to_string(score));
     rw.draw(scoreText);
+
+    rw.draw(dashText);
+    cooldownText.setString("Cooldown: " + std::to_string(player.getCountdown()));
+    rw.draw(cooldownText);
 
     if (gameIsOver)
     {
